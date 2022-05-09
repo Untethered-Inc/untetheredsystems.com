@@ -1,28 +1,40 @@
 import { extendTheme, theme as base } from '@chakra-ui/react';
 import { mode } from '@chakra-ui/theme-tools';
+import { colors } from 'src/theme/presets';
 
 const styles = {
   global: (props) => ({
     body: {
-      bg: mode('#fff', '#2d3142')(props),
+      bg: mode('#F8F4F9', '#16161D')(props),
+      transition: "background .4s ease-in-out",
+    },
+    html: {
+      minH: "100%",
     },
   }),
 };
 
-const colors = {
-  brand: {
-    50: '#f6e8ff',
-    100: '#e3bdff',
-    200: '#cd94ff',
-    300: '#b46ef7',
-    400: '#9a4ce7',
-    500: '#7e31ce',
-    600: '#641eab',
-    700: '#4b1483',
-    800: '#341158',
-    900: '#1e0d2d',
+const semanticTokens = {
+  colors: {
+    error: 'red.500',
+    body: {
+      default: '#F8F4F9',
+      _dark: '#16161D',
+    },
+    navbarBackgroundColor: {
+      default: 'gray.900',
+      _dark: 'gray.50',
+    },
+    titleColor: {
+      default: 'gray.900',
+      _dark: 'gray.50',
+    },
+    descriptionColor: {
+      default: 'gray.700',
+      _dark: 'gray.400',
+    }
   },
-};
+}
 
 const fonts = {
   heading: `Josefin Sans, ${base.fonts.heading}`,
@@ -45,5 +57,5 @@ const config = {
   useSystemColorMode: false,
 };
 
-const theme = extendTheme({ config, styles, colors, fonts, components });
+const theme = extendTheme({ config, styles, semanticTokens, colors, fonts, components });
 export default theme;
