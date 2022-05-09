@@ -1,13 +1,9 @@
 import { Box } from '@chakra-ui/react';
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 import Footer from './footer';
 import Header from './header';
 
-type LayoutProps = {
-  children: ReactNode;
-};
-
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ children }: PropsWithChildren<{}>) => {
   return (
     <>
       <Header />
