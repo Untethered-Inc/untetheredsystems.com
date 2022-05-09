@@ -1,22 +1,20 @@
-import LanguagesButton from '@/components/buttons/languages-button';
-import ThemeButton from '@/components/buttons/theme-button';
-import { HStack } from '@chakra-ui/react';
+import Navbar from '@/components/navbar/navbar';
+import { Container } from '@chakra-ui/react';
 
 const Header = () => {
   return (
-    <HStack
+    <Container
       as='header'
-      position='fixed'
+      position='sticky'
       top='0'
-      p={8}
-      zIndex='tooltip'
-      justify='space-between'
-      align='center'
-      w='100%'
+      px={{ base: 2, sm: 4 }}
+      py={4}
+      zIndex='sticky'
+      w='full'
+      maxW='container.xl'
     >
-      <ThemeButton />
-      <LanguagesButton />
-    </HStack>
+      <Navbar />
+    </Container>
   );
 };
 
