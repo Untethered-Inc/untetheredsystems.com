@@ -1,63 +1,35 @@
+import { CustomThemeContext } from '@/providers/customtheme-provider';
 import {
-  IconButton,
-  IconButtonProps,
-  useColorMode,
-  useColorModeValue as mode,
+  Box, Icon, Tooltip, useColorModeValue
 } from '@chakra-ui/react';
-import { BsMoon } from '@react-icons/all-files/bs/BsMoon';
-import { WiDaySunny } from '@react-icons/all-files/wi/WiDaySunny';
-import { AnimatePresence, motion, Variants } from 'framer-motion';
-
-const variants: Variants = {
-  initial: {
-    opacity: 0,
-    scale: 0.2,
-    transition: {
-      type: 'tween',
-      duration: 0.15,
-      ease: 'easeOut',
-    },
-  },
-  enter: {
-    opacity: 1,
-    scale: 1,
-    transition: {
-      type: 'tween',
-      duration: 0.15,
-      ease: 'easeOut',
-    },
-  },
-  exit: {
-    opacity: 0,
-    scale: 1.8,
-    transition: {
-      type: 'tween',
-      duration: 0.15,
-      ease: 'easeOut',
-    },
-  },
-};
-
-const MotionIconButton = motion<IconButtonProps>(IconButton);
+import { useContext } from 'react';
+import { BsPalette } from 'react-icons/bs';
 
 const ThemeButton = () => {
-  const { toggleColorMode } = useColorMode();
+  const { currentColor, isOpened, open: openThemeSelector, close: closeThemeSelector } =
+    useContext(CustomThemeContext);
+  const hoverColor = useColorModeValue(
+    `${currentColor}.500`,
+    `${currentColor}.300`
+  );
 
   return (
-    <AnimatePresence exitBeforeEnter>
-      <MotionIconButton
-        aria-label='Toggle color mode'
-        size='lg'
-        key={mode('light', 'dark')}
-        initial='initial'
-        animate='enter'
-        exit='exit'
-        colorScheme={mode('purple', 'orange')}
-        icon={mode(<BsMoon />, <WiDaySunny />)}
-        variants={variants}
-        onClick={toggleColorMode}
-      />
-    </AnimatePresence>
+    <>
+      <Tooltip label='Theme settings' hasArrow>
+        <Box py={2}>
+          <Icon
+            display='block'
+            transition='color 0.2s'
+            as={BsPalette}
+            onClick={isOpened ? closeThemeSelector : openThemeSelector}
+            _hover={{
+              color: hoverColor,
+              cursor: 'pointer',
+            }}
+          />
+        </Box>
+      </Tooltip>
+    </>
   );
 };
 
