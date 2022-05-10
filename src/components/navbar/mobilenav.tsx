@@ -1,7 +1,7 @@
 import Logo from '@/components/navbar/logo';
 import { FEATURES } from '@/data/features';
-import { NAVLINKS } from '@/data/navlinks';
-import { NavItem } from '@/types/navlink';
+import { NAVITEMS } from '@/data/navitems';
+import { NavItem } from '@/types/navitem';
 import {
   Box,
   Button,
@@ -106,7 +106,7 @@ const MobileNav = () => {
           </DrawerHeader>
           <DrawerBody h='full'>
             <VStack spacing={3} align='start'>
-              {NAVLINKS.map((link) => (
+              {NAVITEMS.map((link) => (
                 <MobileNavItem
                   key={link.title}
                   {...link}

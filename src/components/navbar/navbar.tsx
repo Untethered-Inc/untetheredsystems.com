@@ -4,7 +4,7 @@ import ThemeButton from '@/components/buttons/theme-button';
 import Logo from '@/components/navbar/logo';
 import MobileNav from '@/components/navbar/mobilenav';
 import { FEATURES } from '@/data/features';
-import { NAVLINKS } from '@/data/navitems';
+import { NAVITEMS } from '@/data/navitems';
 import { CustomThemeContext } from '@/providers/customtheme-provider';
 import { Feature } from '@/types/feature';
 import { NavItem } from '@/types/navitem';
@@ -111,8 +111,8 @@ const Navbar = () => {
         </NextLink>
         <Box display={{ base: 'none', lg: 'inline-flex' }}>
           <HStack spacing={4} ml={4}>
-            {NAVLINKS.map((link) => (
-              <NavItem key={link.title} {...link} />
+            {NAVITEMS.map((item) => (
+              <NavItem key={item.title} {...item} />
             ))}
             <Box role='group'>
               <Button

@@ -1,8 +1,8 @@
-import { NavItem } from '@/types/navlink';
+import { NavItem } from '@/types/navitem';
 import { FaHome } from 'react-icons/fa';
 import { MdOutlineMiscellaneousServices } from 'react-icons/md';
 
-export const NAVLINKS: NavItem[] = [
+export const NAVITEMS: NavItem[] = [
   {
     title: 'Home',
     href: '/',
