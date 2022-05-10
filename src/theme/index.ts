@@ -6,10 +6,10 @@ const styles = {
   global: (props) => ({
     body: {
       bg: mode('#F8F4F9', '#16161D')(props),
-      transition: "background .4s ease-in-out",
+      transition: 'background .4s ease-in-out',
     },
     html: {
-      minH: "100%",
+      minH: '100%',
     },
   }),
 };
@@ -32,12 +32,13 @@ const semanticTokens = {
     descriptionColor: {
       default: 'gray.700',
       _dark: 'gray.400',
-    }
+    },
   },
-}
+};
 
 const fonts = {
-  heading: `Josefin Sans, ${base.fonts.heading}`,
+  heading: 'Julius Sans One, sans-serif',
+  body: 'Fira Sans, sans-serif',
 };
 
 const components = {
@@ -53,9 +54,16 @@ const components = {
 };
 
 const config = {
-  initialColorMode: 'light',
+  initialColorMode: 'dark',
   useSystemColorMode: false,
 };
 
-const theme = extendTheme({ config, styles, semanticTokens, colors, fonts, components });
+const theme = extendTheme({
+  config,
+  styles,
+  semanticTokens,
+  colors,
+  fonts,
+  components,
+});
 export default theme;
