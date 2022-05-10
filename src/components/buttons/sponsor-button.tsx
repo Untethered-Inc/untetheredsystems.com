@@ -1,26 +1,26 @@
-import { Button, Link, useColorModeValue } from '@chakra-ui/react';
+import { CustomThemeContext } from '@/providers/customtheme-provider';
+import { Box, Button, Link } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { useContext } from 'react';
 import { BsHeartFill } from 'react-icons/bs';
 
-type SponsorButtonProps = {
-  color: string;
-};
-
-const SponsorButton = ({ color }: SponsorButtonProps) => {
-  const hoverColor = useColorModeValue(`${color}.400`, `${color}.200`);
+const SponsorButton = () => {
+  const { currentColor } = useContext(CustomThemeContext);
 
   return (
-    <NextLink href='/sponsor' passHref>
-      <Link isExternal>
-        <Button
-          rightIcon={<BsHeartFill color='red' />}
-          colorScheme={color}
-          color='body'
-        >
-          Sponsor
-        </Button>
-      </Link>
-    </NextLink>
+    <Box display={{ base: 'none', md: 'inline-flex' }}>
+      <NextLink href='/sponsor' passHref>
+        <Link isExternal>
+          <Button
+            rightIcon={<BsHeartFill color='red' />}
+            colorScheme={currentColor}
+            color='body'
+          >
+            Sponsor
+          </Button>
+        </Link>
+      </NextLink>
+    </Box>
   );
 };
 

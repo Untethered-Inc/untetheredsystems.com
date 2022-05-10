@@ -1,4 +1,4 @@
-import { IconType } from 'react-icons';
+import { IconType } from 'react-icons/lib';
 
 export type Feature = {
   title: string;
@@ -6,4 +6,4 @@ export type Feature = {
   icon: IconType;
   href: string;
   isExternal: boolean;
-}
+};

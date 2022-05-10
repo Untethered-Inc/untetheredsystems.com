@@ -1,5 +1,4 @@
 import { createContext, PropsWithChildren, useState } from 'react';
-import { presets } from 'src/theme/presets';
 
 type CustomThemeType = {
   isOpened: boolean;
@@ -11,7 +10,7 @@ type CustomThemeType = {
 
 export const CustomThemeContext = createContext<CustomThemeType>({
   isOpened: false,
-  currentColor: 'cyan',
+  currentColor: '',
   setCurrentColor: () => {},
   open: () => {},
   close: () => {},
@@ -19,7 +18,7 @@ export const CustomThemeContext = createContext<CustomThemeType>({
 
 const CustomThemeProvider = ({ children }: PropsWithChildren<{}>) => {
   const [isOpened, setIsOpened] = useState<boolean>(false);
-  const [currentColor, setCurrentColor] = useState<string>('cyan');
+  const [currentColor, setCurrentColor] = useState<string>('default');
 
   const open = () => {
     setIsOpened(true);

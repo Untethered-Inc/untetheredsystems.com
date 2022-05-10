@@ -1,7 +1,11 @@
 import { Heading, HStack, Image, Skeleton } from '@chakra-ui/react';
 import { SITENAME } from 'src/constants';
 
-const Logo = () => {
+type LogoProps = {
+  displaySiteName: boolean;
+};
+
+const Logo = ({ displaySiteName }: LogoProps) => {
   return (
     <HStack spacing={2} align='center'>
       <Image
@@ -11,7 +15,11 @@ const Logo = () => {
         w={10}
         h={10}
       />
-      <Heading as='h1' fontSize='2xl' display={{ base: 'none', md: 'block' }}>
+      <Heading
+        as='h1'
+        fontSize={{ base: 'xl', lg: '2xl' }}
+        display={displaySiteName ? 'flex' : 'none'}
+      >
         {SITENAME}
       </Heading>
     </HStack>

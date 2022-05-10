@@ -4,7 +4,9 @@ import '@/internationalization/i18n';
 import CustomThemeProvider from '@/providers/customtheme-provider';
 import theme from '@/theme';
 import { ChakraProvider } from '@chakra-ui/react';
+import '@fontsource/fira-sans';
 import '@fontsource/josefin-sans/700.css';
+import '@fontsource/julius-sans-one';
 import { AppProps } from 'next/app';
 
 const App = ({ Component, pageProps }: AppProps) => {

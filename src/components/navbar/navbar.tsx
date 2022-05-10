@@ -2,10 +2,12 @@ import LanguagesButton from '@/components/buttons/languages-button';
 import SponsorButton from '@/components/buttons/sponsor-button';
 import ThemeButton from '@/components/buttons/theme-button';
 import Logo from '@/components/navbar/logo';
+import MobileNav from '@/components/navbar/mobilenav';
 import { FEATURES } from '@/data/features';
+import { NAVLINKS } from '@/data/navitems';
 import { CustomThemeContext } from '@/providers/customtheme-provider';
 import { Feature } from '@/types/feature';
-import { NavLink } from '@/types/navlink';
+import { NavItem } from '@/types/navitem';
 import {
   Box,
   Button,
@@ -30,7 +32,7 @@ const Navbar = () => {
   const { currentColor } = useContext(CustomThemeContext);
   const hoverLinkColor = mode(`${currentColor}.500`, `${currentColor}.300`);
 
-  const NavLink = ({ title, href, isExternal }: NavLink) => {
+  const NavItem = ({ title, href, isExternal, ...props }: NavItem) => {
     const router = useRouter();
     const isActive = router.pathname === href;
     const activeColor = mode(`${currentColor}.500`, `${currentColor}.300`);
@@ -46,6 +48,7 @@ const Navbar = () => {
           }
           color={isActive ? activeColor : 'titleColor'}
           isExternal={isExternal}
+          {...props}
         >
           {title}
         </Link>
@@ -94,19 +97,6 @@ const Navbar = () => {
     </SimpleGrid>
   );
 
-  const NAVLINKS = [
-    {
-      title: 'Home',
-      href: '/',
-      isExternal: false,
-    },
-    {
-      title: 'Services',
-      href: '/services',
-      isExternal: false,
-    },
-  ];
-
   return (
     <Flex alignItems='center' justifyContent='space-between' mx='auto'>
       <HStack spacing={4}>
@@ -116,13 +106,13 @@ const Navbar = () => {
             alignItems='center'
             _hover={{ textDecoration: 'none' }}
           >
-            <Logo />
+            <Logo displaySiteName={true} />
           </Link>
         </NextLink>
-        <Box display={{ base: 'none', md: 'inline-flex' }}>
-          <HStack spacing={2}>
+        <Box display={{ base: 'none', lg: 'inline-flex' }}>
+          <HStack spacing={4} ml={4}>
             {NAVLINKS.map((link) => (
-              <NavLink key={link.title} {...link} />
+              <NavItem key={link.title} {...link} />
             ))}
             <Box role='group'>
               <Button
@@ -164,7 +154,8 @@ const Navbar = () => {
         </NextLink>
         <ThemeButton />
         <LanguagesButton />
-        <SponsorButton color={currentColor} />
+        <SponsorButton />
+        <MobileNav />
       </HStack>
     </Flex>
   );
