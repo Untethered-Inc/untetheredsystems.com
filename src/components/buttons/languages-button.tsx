@@ -44,8 +44,8 @@ const LanguagesButton = () => {
 
   return (
     <>
-      <Tooltip label='Language settings' hasArrow>
-        <Box py={2}>
+      <Tooltip label='Region settings' hasArrow>
+        <Box py={2} px={0.5}>
           <Icon
             display='block'
             transition='color 0.2s'
@@ -69,7 +69,7 @@ const LanguagesButton = () => {
           <ModalHeader>
             <HStack justify='space-between' w='full'>
               <Heading as='h4' fontSize='xl'>
-                Language settings
+                Region settings
               </Heading>
               <IconButton
                 aria-label='Close language settings'
@@ -108,7 +108,11 @@ const LanguagesButton = () => {
             </Stack>
           </ModalBody>
           <ModalFooter>
-            <Button onClick={onClose}>Close</Button>
+            <HStack spacing={2} w='full' justify='end'>
+              <Button colorScheme={currentColor} onClick={onClose}>
+                Close
+              </Button>
+            </HStack>
           </ModalFooter>
         </ModalContent>
       </Modal>
