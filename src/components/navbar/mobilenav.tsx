@@ -1,6 +1,7 @@
 import Logo from '@/components/navbar/logo';
 import { FEATURES } from '@/data/features';
 import { NAVITEMS } from '@/data/navitems';
+import { CustomThemeContext } from '@/providers/customtheme';
 import { NavItem } from '@/types/navitem';
 import {
   Box,
@@ -26,7 +27,6 @@ import { useContext } from 'react';
 import { BsList, BsX } from 'react-icons/bs';
 import { HiSparkles } from 'react-icons/hi';
 import { IoIosArrowDown, IoIosArrowUp } from 'react-icons/io';
-import { CustomThemeContext } from '../../providers/customtheme-provider';
 
 const MobileNav = () => {
   const {
@@ -89,6 +89,7 @@ const MobileNav = () => {
         placement='top'
         isOpen={mobileNavIsOpened}
         onClose={closeMobileNav}
+        blockScrollOnMount={false}
       >
         <DrawerContent>
           <DrawerHeader>

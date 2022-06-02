@@ -1,11 +1,12 @@
+import AuthButton from '@/components/auth/auth-button';
+import ContributeButton from '@/components/buttons/contribute-button';
 import LanguagesButton from '@/components/buttons/languages-button';
-import SponsorButton from '@/components/buttons/sponsor-button';
 import ThemeButton from '@/components/buttons/theme-button';
 import Logo from '@/components/navbar/logo';
 import MobileNav from '@/components/navbar/mobilenav';
 import { FEATURES } from '@/data/features';
 import { NAVITEMS } from '@/data/navitems';
-import { CustomThemeContext } from '@/providers/customtheme-provider';
+import { CustomThemeContext } from '@/providers/customtheme';
 import { Feature } from '@/types/feature';
 import { NavItem } from '@/types/navitem';
 import {
@@ -15,6 +16,7 @@ import {
   HStack,
   Icon,
   IconButton,
+  Image,
   Link,
   SimpleGrid,
   Spacer,
@@ -32,7 +34,7 @@ const Navbar = () => {
   const { currentColor } = useContext(CustomThemeContext);
   const hoverLinkColor = mode(`${currentColor}.500`, `${currentColor}.300`);
 
-  const NavItem = ({ title, href, isExternal, ...props }: NavItem) => {
+  const NavItem = ({ title, href, isExternal, ...props }: Partial<NavItem>) => {
     const router = useRouter();
     const isActive = router.pathname === href;
     const activeColor = mode(`${currentColor}.500`, `${currentColor}.300`);
@@ -64,7 +66,6 @@ const Navbar = () => {
           p={4}
           display='flex'
           alignItems='start'
-          rounded='lg'
           _hover={{ bg: hoverLinkColor }}
           isExternal={isExternal}
         >
@@ -84,12 +85,10 @@ const Navbar = () => {
 
   const Features = (
     <SimpleGrid
-      columns={{ base: 1, md: 3, lg: 5 }}
+      columns={5}
       pos='relative'
       gap={{ base: 6, sm: 8 }}
-      px={5}
-      py={6}
-      p={{ sm: 8 }}
+      py={10}
     >
       {FEATURES.map((feature) => (
         <Feature key={feature.title} {...feature} />
@@ -98,47 +97,43 @@ const Navbar = () => {
   );
 
   return (
-    <Flex alignItems='center' justifyContent='space-between' mx='auto'>
-      <HStack spacing={4}>
-        <NextLink href='/' passHref>
-          <Link
-            display='flex'
-            alignItems='center'
-            _hover={{ textDecoration: 'none' }}
-          >
-            <Logo displaySiteName={true} />
-          </Link>
-        </NextLink>
-        <Box display={{ base: 'none', lg: 'inline-flex' }}>
-          <HStack spacing={4} ml={4}>
-            {NAVITEMS.map((item) => (
-              <NavItem key={item.title} {...item} />
-            ))}
-            <Box role='group'>
-              <Button
-                alignItems='center'
-                variant='unstyled'
-                fontSize='md'
-                color='titleColor'
-                fontWeight='normal'
-                _focus={{ boxShadow: 'none' }}
-                rightIcon={<IoIosArrowDown />}
-              >
-                Features
-              </Button>
-              <Box
-                pos='absolute'
-                left={0}
-                w='full'
-                display='none'
-                _groupHover={{ display: 'block' }}
-              >
-                {Features}
-              </Box>
+    <Flex as='nav' w='full' alignItems='center' justifyContent='space-between'>
+      <Logo displaySiteName={true} />
+      <Spacer />
+      <Box display={{ base: 'none', lg: 'inline-flex' }}>
+        <HStack spacing={4} ml={4}>
+          {NAVITEMS.map(({ title, href, isExternal }) => (
+            <NavItem
+              key={title}
+              title={title}
+              href={href}
+              isExternal={isExternal}
+            />
+          ))}
+          <Box role='group'>
+            <Button
+              alignItems='center'
+              variant='unstyled'
+              fontSize='md'
+              color='titleColor'
+              fontWeight='normal'
+              _focus={{ boxShadow: 'none' }}
+              rightIcon={<IoIosArrowDown />}
+            >
+              Features
+            </Button>
+            <Box
+              pos='absolute'
+              left={0}
+              w='full'
+              display='none'
+              _groupHover={{ display: 'block' }}
+            >
+              {Features}
             </Box>
-          </HStack>
-        </Box>
-      </HStack>
+          </Box>
+        </HStack>
+      </Box>
       <Spacer />
       <HStack spacing={2}>
         <NextLink href={GITHUB_PROFILE} passHref>
@@ -154,7 +149,8 @@ const Navbar = () => {
         </NextLink>
         <ThemeButton />
         <LanguagesButton />
-        <SponsorButton />
+        <AuthButton />
+        <ContributeButton />
         <MobileNav />
       </HStack>
     </Flex>

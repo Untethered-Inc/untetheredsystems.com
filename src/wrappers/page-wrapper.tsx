@@ -1,7 +1,7 @@
 import { Container, ContainerProps } from '@chakra-ui/react';
 import { motion, Variants } from 'framer-motion';
 import { NextSeo } from 'next-seo';
-import { ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 
 const variants: Variants = {
   hidden: {
@@ -24,15 +24,13 @@ const variants: Variants = {
   },
 };
 
-type PageProps = {
-  title: string;
-  description?: string;
-  children: ReactNode;
-};
-
 const MotionContainer = motion<ContainerProps>(Container);
 
-const PageWrapper = ({ title, description, children }: PageProps) => {
+const PageWrapper = ({
+  title,
+  description,
+  children,
+}: PropsWithChildren<{ title: string; description: string }>) => {
   return (
     <>
       <NextSeo
@@ -66,7 +64,7 @@ const PageWrapper = ({ title, description, children }: PageProps) => {
       />
       <MotionContainer
         display='flex'
-        maxW='container.lg'
+        maxW='full'
         minH={{ base: 'auto', md: '100vh' }}
         px={{ base: 4, lg: 8 }}
         initial='hidden'

@@ -3,7 +3,7 @@ export const presets = (brand: string) => {
 };
 
 export const colors = {
-  default: {
+  blue: {
     50: '#ecefff',
     100: '#cbceeb',
     200: '#a9aed6',

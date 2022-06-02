@@ -1,7 +1,11 @@
+import { useAuth } from '@/providers/auth';
 import PageWrapper from '@/wrappers/page-wrapper';
 import { Flex, Text } from '@chakra-ui/react';
+import { NextPage } from 'next';
 
-const IndexPage = () => {
+const IndexPage: NextPage = () => {
+  const { session } = useAuth();
+
   return (
     <PageWrapper
       title='Home'
@@ -9,6 +13,7 @@ const IndexPage = () => {
     >
       <Flex align='center' justify='center' h='100vh' w='full'>
         <Text>Welcome to Untethered Systems LLC.</Text>
+        {session && <Text>Dear {session.user.id}.</Text>}
       </Flex>
     </PageWrapper>
   );

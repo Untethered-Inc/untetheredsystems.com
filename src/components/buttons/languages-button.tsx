@@ -1,6 +1,6 @@
 import CountryFlag from '@/components/countryflag';
 import { LANGUAGES } from '@/data/languages';
-import { CustomThemeContext } from '@/providers/customtheme-provider';
+import { CustomThemeContext } from '@/providers/customtheme';
 import {
   Box,
   Button,

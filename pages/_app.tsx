@@ -1,24 +1,63 @@
 import Layout from '@/components/layout/main-layout';
 import ThemeSelector from '@/components/theme-selector';
 import '@/internationalization/i18n';
-import CustomThemeProvider from '@/providers/customtheme-provider';
-import theme from '@/theme';
-import { ChakraProvider } from '@chakra-ui/react';
+import { AuthProvider, useAuthLayer } from '@/providers/auth';
+import CustomThemeProvider from '@/providers/customtheme';
+import { CircularProgress, Flex } from '@chakra-ui/react';
 import '@fontsource/fira-sans';
-import '@fontsource/josefin-sans/700.css';
 import '@fontsource/julius-sans-one';
+import { NextPage } from 'next';
 import { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
+import { ReactElement, ReactNode, useEffect, useState } from 'react';
 
-const App = ({ Component, pageProps }: AppProps) => {
+type NextPageWithLayout = NextPage & {
+  getLayout?: (page: ReactElement) => ReactNode;
+  isProtected?: boolean;
+};
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout;
+};
+
+const App = ({ Component, pageProps }: AppPropsWithLayout) => {
+  const router = useRouter();
+  const isProtected = Component.isProtected ?? false;
+  const { state } = useAuthLayer();
+
+  const [enhancedPage, setEnhancedPage] = useState<ReactNode>();
+
+  useEffect(() => {
+    const getLayout = Component.getLayout ?? ((page: ReactElement) => page);
+
+    if (isProtected) {
+      switch (state) {
+        case 'CHECKING':
+          setEnhancedPage(
+            <Flex w='full' h='100vh' justify='center' align='center'>
+              <CircularProgress isIndeterminate />
+            </Flex>
+          );
+        case 'LOGGED_IN':
+          setEnhancedPage(getLayout(<Component {...pageProps} />));
+          break;
+        case 'LOGGED_OUT':
+        default:
+          router.replace('/login');
+          break;
+      }
+    } else {
+      setEnhancedPage(getLayout(<Component {...pageProps} />));
+    }
+  }, [state, setEnhancedPage, Component, pageProps, isProtected, router]);
+
   return (
-    <ChakraProvider theme={theme}>
+    <AuthProvider>
       <CustomThemeProvider>
         <ThemeSelector />
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
+        <Layout>{enhancedPage}</Layout>
       </CustomThemeProvider>
-    </ChakraProvider>
+    </AuthProvider>
   );
 };
 

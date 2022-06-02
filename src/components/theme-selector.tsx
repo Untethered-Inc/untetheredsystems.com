@@ -1,4 +1,4 @@
-import { CustomThemeContext } from '@/providers/customtheme-provider';
+import { CustomThemeContext } from '@/providers/customtheme';
 import {
   Button,
   Circle,

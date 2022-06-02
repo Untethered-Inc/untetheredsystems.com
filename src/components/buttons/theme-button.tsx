@@ -1,4 +1,4 @@
-import { CustomThemeContext } from '@/providers/customtheme-provider';
+import { CustomThemeContext } from '@/providers/customtheme';
 import { Box, Icon, Tooltip, useColorModeValue } from '@chakra-ui/react';
 import { useContext } from 'react';
 import { BsPalette } from 'react-icons/bs';
