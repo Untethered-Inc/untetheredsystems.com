@@ -23,7 +23,8 @@
       "@/wrappers/*": ["src/wrappers/*"],
       "@/internationalization/*": ["internationalization/*"],
       "@/locales/*": ["internationalization/locales/*"],
-      "@/theme": ["src/theme"]
+      "@/supabase": ["src/supabase/index.ts"],
+      "@/theme/*": ["src/theme/*"]
     },
     "incremental": true
   },
